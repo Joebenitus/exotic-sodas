@@ -1,9 +1,15 @@
 import React from 'react'
+import Header from './components/Header'
+import SodaControl from './components/SodaControl'
+import Container from 'react-bootstrap/Container';
 
 function App() {
   return (
     <>
-      <h1>Joe's Exotic Sodas</h1>
+      <Header/>
+      <Container>
+        <SodaControl/>
+      </Container>
     </>
   );
 }
