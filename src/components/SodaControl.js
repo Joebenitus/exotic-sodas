@@ -1,6 +1,6 @@
 import React from 'react';
 import SodaDetail from './SodaDetail';
-import SodaForm from './SodaForm';
+import SodaForm from './NewSodaForm';
 import SodaList from './SodaList';
 
 class SodaControl extends React.Component {
@@ -14,9 +14,16 @@ class SodaControl extends React.Component {
   }
 
   handleClick = () => {
-    this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage
-    }));
+    if (this.state.selectedSoda !== null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedSoda: null
+      });
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage
+      }));
+    }
   }
 
   handleAddingNewSodaToList = (newSoda) => {
@@ -30,11 +37,19 @@ class SodaControl extends React.Component {
     this.setState({selectedSoda: selectedSoda});
   }
 
+  handleDeletingSoda = (id) => {
+    const newMasterSodaList = this.state.masterSodaList.filter(soda => soda.id !== id);
+    this.setState({
+      masterSodaList: newMasterSodaList,
+      selectedSoda: null
+    })
+  }
+
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.selectedSoda !== null) {
-      currentlyVisibleState = <SodaDetail soda={this.state.selectedSoda}/>
+      currentlyVisibleState = <SodaDetail soda={this.state.selectedSoda} onClickingDelete={this.handleDeletingSoda}/>
       buttonText = 'Return to Soda List';
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <SodaForm onNewSodaCreation={this.handleAddingNewSodaToList}/>
