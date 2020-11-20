@@ -46,10 +46,13 @@ class SodaControl extends React.Component {
   }
 
   handleSellingSoda = (id) => {
-    const soldItem = this.state.masterSodaList.filter(soda => soda.id === id)[0]
-    soldItem.cans -= 1;
+    const soldSoda = this.state.masterSodaList.filter(soda => soda.id === id)[0];
+    if (parseInt(soldSoda.cans) < 1) {
+      soldSoda.cans = 'Sold Out!';
+    }
+    soldSoda.cans = soldSoda.cans - 1 || 'Sold Out!'
     this.setState({
-      selectedSoda: soldItem
+      selectedSoda: soldSoda
     })
   }
 
@@ -57,13 +60,19 @@ class SodaControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.selectedSoda !== null) {
-      currentlyVisibleState = <SodaDetail soda={this.state.selectedSoda} onClickingDelete={this.handleDeletingSoda} onClickingSell={this.handleSellingSoda}/>
+      currentlyVisibleState = <SodaDetail
+      soda={this.state.selectedSoda}
+      onClickingDelete={this.handleDeletingSoda} 
+      onClickingSell={this.handleSellingSoda}/>
       buttonText = 'Return to Soda List';
     } else if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <SodaForm onNewSodaCreation={this.handleAddingNewSodaToList}/>
+      currentlyVisibleState = <SodaForm 
+      onNewSodaCreation={this.handleAddingNewSodaToList}/>
       buttonText = 'Return to Soda List';
     } else {
-      currentlyVisibleState = <SodaList sodaList={this.state.masterSodaList} onSodaSelection={this.handleChangingSelectedSoda}/>
+      currentlyVisibleState = <SodaList 
+      sodaList={this.state.masterSodaList} 
+      onSodaSelection={this.handleChangingSelectedSoda}/>
       buttonText = 'Add Soda';
     }
     return (
