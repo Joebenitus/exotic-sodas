@@ -17,7 +17,7 @@ function Soda(props) {
 Soda.propTypes = {
   name: PropTypes.string,
   flavor: PropTypes.string,
-  cans: PropTypes.number,
+  cans: PropTypes.string,
   id: PropTypes.string,
   whenSodaClicked: PropTypes.func
 }
