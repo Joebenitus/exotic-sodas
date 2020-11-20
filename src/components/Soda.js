@@ -6,7 +6,7 @@ function Soda(props) {
     <React.Fragment>
       <h3>{props.name}</h3>
       <h4>Flavor: {props.flavor}</h4>
-      <p><em>${props.cost}</em></p>
+      <p><em>Cans left: {props.cans}</em></p>
       <hr/>
     </React.Fragment>
   );
@@ -15,7 +15,7 @@ function Soda(props) {
 Soda.propTypes = {
   name: PropTypes.string,
   flavor: PropTypes.string,
-  cost: PropTypes.string
+  cans: PropTypes.number
 }
 
 export default Soda;

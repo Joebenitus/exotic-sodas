@@ -5,17 +5,17 @@ const masterSodaList = [
   {
     name: 'Berry Pop',
     flavor: 'Ginger',
-    cost: '100'
+    cans: 100
   },
   {
     name: 'Joe\'s Peach',
     flavor: 'Corn',
-    cost: '135'
+    cans: 135
   },
   {
     name: 'Non-Alcoholic Beer',
     flavor: 'Bread',
-    cost: '115'
+    cans: 115
   }
 ]
 
@@ -28,7 +28,7 @@ function SodaList() {
         <Soda
           name = {soda.name}
           flavor = {soda.flavor}
-          cost = {soda.cost}
+          cans = {soda.cans}
           key = {index}/>
       )}
       
