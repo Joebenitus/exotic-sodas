@@ -2,15 +2,14 @@ import React from 'react';
 import SodaDetail from './SodaDetail';
 import SodaForm from './SodaForm';
 import SodaList from './SodaList';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 class SodaControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterSodaList: []
+      masterSodaList: [],
+      selectedSoda: null
     };
   }
 
@@ -26,14 +25,22 @@ class SodaControl extends React.Component {
                     formVisibleOnPage: false })
   }
 
+  handleChangingSelectedSoda = (id) => {
+    const selectedSoda = this.state.masterSodaList.filter(soda => soda.id === id)[0];
+    this.setState({selectedSoda: selectedSoda});
+  }
+
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.state.formVisibleOnPage) {
+    if (this.state.selectedSoda !== null) {
+      currentlyVisibleState = <SodaDetail soda={this.state.selectedSoda}/>
+      buttonText = 'Return to Soda List';
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <SodaForm onNewSodaCreation={this.handleAddingNewSodaToList}/>
       buttonText = 'Return to Soda List';
     } else {
-      currentlyVisibleState = <SodaList sodaList={this.state.masterSodaList}/>
+      currentlyVisibleState = <SodaList sodaList={this.state.masterSodaList} onSodaSelection={this.handleChangingSelectedSoda}/>
       buttonText = 'Add Soda';
     }
     return (
