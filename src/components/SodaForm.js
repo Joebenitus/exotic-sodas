@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 function SodaForm(props) {
   return (
     <React.Fragment>
-      <p>soda form</p>
+      <h2>Add Soda</h2>
+      <hr/>
     </React.Fragment>
   );
 }
