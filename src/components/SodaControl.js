@@ -9,7 +9,8 @@ class SodaControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisibleOnPage: false
+      formVisibleOnPage: false,
+      masterSodaList: []
     };
   }
 
@@ -19,15 +20,21 @@ class SodaControl extends React.Component {
     }));
   }
 
+  handleAddingNewSodaToList = (newSoda) => {
+    const newMasterSodaList = this.state.masterSodaList.concat(newSoda);
+    this.setState({ masterSodaList: newMasterSodaList,
+                    formVisibleOnPage: false })
+  }
+
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <SodaForm/>
-      buttonText = 'Return to Ticket List';
+      currentlyVisibleState = <SodaForm onNewSodaCreation={this.handleAddingNewSodaToList}/>
+      buttonText = 'Return to Soda List';
     } else {
-      currentlyVisibleState = <SodaList/>
-      buttonText = 'Add Ticket';
+      currentlyVisibleState = <SodaList sodaList={this.state.masterSodaList}/>
+      buttonText = 'Add Soda';
     }
     return (
       <React.Fragment>
