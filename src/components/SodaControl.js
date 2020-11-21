@@ -59,6 +59,9 @@ class SodaControl extends React.Component {
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
+    const sodaControlStyling = {
+      paddingTop: '50px'
+    }
     if (this.state.selectedSoda !== null) {
       currentlyVisibleState = <SodaDetail
       soda={this.state.selectedSoda}
@@ -77,8 +80,10 @@ class SodaControl extends React.Component {
     }
     return (
       <React.Fragment>
-        {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button>
+        <div style={sodaControlStyling}>
+          {currentlyVisibleState}
+          <button onClick={this.handleClick}>{buttonText}</button>
+        </div>
       </React.Fragment>
     )
   }
